@@ -168,7 +168,7 @@ We welcome contributions! Feel free to:
 - 💡 Propose new features (e.g., Image receipts, Global analytics).
 - 🔧 Submit Pull Requests for optimizations.
 
-**Project maintainer:** [Mustad Afin Shimanto](https://github.com/Mustad-Afin-Shimanto)  
+**Project maintainer:** [Mustad Afin Shimanto](https://github.com/Md-Kawsarul-Islam)  
 **Developed with ❤️ for the student & mess community.**
 
 ---
