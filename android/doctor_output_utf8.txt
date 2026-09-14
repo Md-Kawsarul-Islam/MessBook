@@ -1,0 +1,36 @@
+﻿[ΓêÜ] Flutter (Channel stable, 3.38.7, on Microsoft Windows [Version 10.0.26200.8037], locale en-US) [273ms]
+    ΓÇó Flutter version 3.38.7 on channel stable at E:\Workspace\Antigravity\SDK\flutter
+    ΓÇó Upstream repository https://github.com/flutter/flutter.git
+    ΓÇó Framework revision 3b62efc2a3 (3 months ago), 2026-01-13 13:47:42 -0800
+    ΓÇó Engine revision 78fc3012e4
+    ΓÇó Dart version 3.10.7
+    ΓÇó DevTools version 2.51.1
+    ΓÇó Feature flags: enable-web, enable-linux-desktop, enable-macos-desktop, enable-windows-desktop, enable-android, enable-ios, cli-animations, enable-native-assets, omit-legacy-version-file, enable-lldb-debugging
+
+[ΓêÜ] Windows Version (Windows 11 or higher, 25H2, 2009) [594ms]
+
+[X] Android toolchain - develop for Android devices [114ms]
+    ΓÇó Android SDK at C:\Program Files
+    ΓÇó Emulator version unknown
+    X cmdline-tools component is missing.
+      Try installing or updating Android Studio.
+      Alternatively, download the tools from https://developer.android.com/studio#command-line-tools-only and make sure to set the ANDROID_HOME environment variable.
+      See https://developer.android.com/studio/command-line for more details.
+
+[ΓêÜ] Chrome - develop for the web [96ms]
+    ΓÇó Chrome at C:\Program Files\Google\Chrome\Application\chrome.exe
+
+[ΓêÜ] Visual Studio - develop Windows apps (Visual Studio Build Tools 2022 17.14.24) [95ms]
+    ΓÇó Visual Studio at C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools
+    ΓÇó Visual Studio Build Tools 2022 version 17.14.36908.2
+    ΓÇó Windows 10 SDK version 10.0.26100.0
+
+[ΓêÜ] Connected device (3 available) [134ms]
+    ΓÇó Windows (desktop) ΓÇó windows ΓÇó windows-x64    ΓÇó Microsoft Windows [Version 10.0.26200.8037]
+    ΓÇó Chrome (web)      ΓÇó chrome  ΓÇó web-javascript ΓÇó Google Chrome 146.0.7680.165
+    ΓÇó Edge (web)        ΓÇó edge    ΓÇó web-javascript ΓÇó Microsoft Edge 146.0.3856.72
+
+[ΓêÜ] Network resources [569ms]
+    ΓÇó All expected network resources are available.
+
+! Doctor found issues in 1 category.

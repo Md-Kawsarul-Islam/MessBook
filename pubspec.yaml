@@ -1,0 +1,59 @@
+# pubspec.yaml
+
+name: mess_manager # Updated from 'mess_meal_management_app'
+description: "A Flutter mobile application designed to simplify the management of meals, expenses, contributions, and market duties within a Mess."
+publish_to: 'none'
+
+version: 4.2.0+1
+
+environment:
+  sdk: ^3.7.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  package_info_plus: ^8.0.0
+  firebase_core: ^3.6.0
+  firebase_auth: ^5.3.1
+  cloud_firestore: ^5.4.4
+  path_provider: ^2.1.1
+  path: ^1.9.0
+  shared_preferences: ^2.2.2
+  provider: ^6.0.5
+  bcrypt: ^1.1.0
+  intl: ^0.20.2
+  flutter_localizations:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  pdf: ^3.10.4
+  printing: ^5.11.1
+  fl_chart: ^0.66.0
+  flutter_rating_bar: ^4.0.1
+  firebase_messaging: ^15.2.0
+  flutter_local_notifications: ^18.0.1
+  safe_device: ^1.1.4
+printing: ^5.14.0
+path_provider: ^2.1.5
+permission_handler: ^12.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.13.1 # <--- ENSURE THIS IS HERE
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/ # Make sure this path exists and contains your app_logo.png
+  # REMOVED: The 'name: "Mess_Manager"' line from here. It caused the error.
+
+# Configuration for flutter_launcher_icons
+flutter_icons:
+  android: true # Generate icons for Android
+  ios: false    # Set to true if you also want to generate for iOS (but your project is Android only)
+  image_path: "assets/images/app_logo.png" # <--- IMPORTANT: Ensure this path points to YOUR actual logo file
+  # Example if you want adaptive icons (Android 8.0+):
+  # adaptive_icon_background: "#FFFFFF" # Background color for adaptive icon
+  # adaptive_icon_foreground: "assets/images/app_logo_foreground.png" # Foreground image for adaptive icon
