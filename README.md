@@ -1,177 +1,382 @@
-# 🍽️ MessBook — The Ultimate Mess & Meal Management Solution
+# 🍽️ MessBook — Mess & Meal Management System
 
-[![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)](https://flutter.dev)
-[![Firebase](https://img.shields.io/badge/Firebase-%23039BE5.svg?style=for-the-badge&logo=firebase)](https://firebase.google.com)
-[![Version](https://img.shields.io/badge/Version-4.2.0-blue.svg?style=for-the-badge)](https://github.com/Mustad-Afin-Shimanto/mess_meal_management_app/releases)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+[![Flutter](https://img.shields.io/badge/Flutter-02569B.svg?style=for-the-badge\&logo=Flutter\&logoColor=white)](https://flutter.dev)
+[![Firebase](https://img.shields.io/badge/Firebase-FFCA28.svg?style=for-the-badge\&logo=firebase\&logoColor=black)](https://firebase.google.com)
+[![Dart](https://img.shields.io/badge/Dart-0175C2.svg?style=for-the-badge\&logo=dart\&logoColor=white)](https://dart.dev)
+[![Version](https://img.shields.io/badge/Version-4.2.0-blue.svg?style=for-the-badge)](https://github.com/Md-Kawsarul-Islam/MessBook)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-Managing a mess or shared living arrangement (hostel/dorm) manually with spreadsheets and notebooks is outdated and error-prone. **MessBook** is a premium, cloud-native Flutter application designed to automate every aspect of mess management—from meal tracking and market duty scheduling to real-time financial transparency and group communication.
+**MessBook** is a Flutter-based mess and meal management application designed for students and people living in shared accommodations such as messes, hostels, and dormitories.
+
+The application brings meal tracking, market expenses, member contributions, market duties, requests, notices, communication, analytics, and financial reporting into a single platform.
+
+Instead of relying on notebooks, spreadsheets, or multiple external applications, MessBook provides a centralized system for managing day-to-day mess operations.
 
 ---
 
-🦾 **AI Collaboration**: This project was created with **Vive coding using AI**. **I.d.E.** used **Antigravity** to architect, code, and document this entire solution.
+## 🤖 AI-Assisted Development
+
+This project was developed with the assistance of AI-powered coding and development tools.
+
+AI was used throughout the development process for architecture assistance, implementation, debugging, documentation, and development workflow support.
 
 ---
+
+## 📸 Screenshots
 
 <p align="center">
-  <img src="assets/images/app_logo.png" width="400" alt="App Header">
+  <img src="assets/images/app_logo.png" width="400" alt="MessBook App Logo">
 </p>
 
-### 📸 Screenshots
-
 <p align="center">
-  <img src="assets/images/screenshot_splash.png" width="220" alt="Splash Screen">
+  <img src="assets/images/screenshot_splash.png" width="220" alt="MessBook Splash Screen">
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="assets/images/screenshot_login.png" width="220" alt="Login Screen">
+  <img src="assets/images/screenshot_login.png" width="220" alt="MessBook Login Screen">
 </p>
 
 ---
 
-## 🌟 Why MessBook?
+# 🌟 Why MessBook?
 
-In a shared living environment, transparency and efficiency are paramount. **Mess Manager** bridges the gap between members and management through:
-- **Zero Confusion**: Real-time meal counting and expense tracking.
-- **Fairness**: Automated meal rate calculations and balanced market duty assignments.
-- **Privacy & Security**: Secure user authentication and device integrity checks.
-- **Reporting**: One-click professional PDF reports for monthly audits.
+Managing a shared mess manually can become complicated when multiple members are involved.
 
----
+MessBook focuses on:
 
-## 🔥 Key Features & Capabilities
-
-### 🛡️ Role-Based Ecosystem
-The app features a hierarchical access system to keep operations streamlined and secure.
-
-#### 👑 **Admin (Super User)**
-- **Global Management**: Oversee multiple hostels/messes from a single account.
-- **Access Control**: Hand-pick Managers, reset member passwords, and manage user roles.
-- **Data Safeguards**: Export full database backups to local storage for extra security.
-- **Invitation System**: Generate unique **Hostel Invite Codes** for secure member onboarding.
-
-#### 💼 **Manager (Operations Leader)**
-- **Financial Control**: Log daily market expenses and member contributions (Hand Cash).
-- **Meal Management**: Record daily breakfast, lunch, and dinner counts for all members.
-- **Market Coordination**: Assign and track market duties to ensure fairness.
-- **Request Processing**: Approve or reject expense requests submitted by members.
-- **Communication**: Post urgent/normal notices to the mess bulletin board.
-
-#### 👤 **Member (End User)**
-- **Personal Dashboard**: View real-time personal balance, meal counts, and current meal rate.
-- **Transparency**: Access personal history for meals, contributions, and expenses.
-- **Engagement**: Rate daily meals and leave feedback for the Manager.
-- **Shopping Requests**: Request funds for specific items (Entry Request) directly through the app.
-- **Notifications**: Stay updated with push notifications for notices, approvals, and duties.
+* 🍽️ **Meal Management** — Track breakfast, lunch, and dinner.
+* 💰 **Expense Management** — Record market expenses and member contributions.
+* 📊 **Financial Transparency** — Monitor balances, expenses, and meal rates.
+* 🛒 **Market Duty Management** — Organize and track member duties.
+* 📢 **Mess Communication** — Publish notices and communicate with members.
+* 📄 **Reporting** — Generate financial reports and statements.
+* 🔐 **Role-Based Access** — Separate Admin, Manager, and Member capabilities.
+* ☁️ **Cloud Data** — Store and synchronize application data using Firebase.
 
 ---
 
-## 🚀 Specialized Modules
+# 🔥 Key Features
 
-- **📊 Dynamic Analytics**: Interactive charts (powered by `fl_chart`) showing expense trends and meal consumption.
-- **💬 Real-time Group Chat**: A dedicated secure channel for mess members to discuss daily operations without external apps.
-- **📋 Smart Market Duty**: Automated or manual scheduling visible to everyone to prevent "who's turn is it?" arguments.
-- **🧠 Expense Prediction**: Intelligent forecasting to estimate total monthly costs based on current spending patterns.
-- **📄 Pro PDF Engine**: Generates professional, transparent financial receipts and monthly statements.
+## 👑 Admin
 
----
+The Admin has global control over mess and user management.
 
-## 🛠️ Modern Technology Stack
+### User & Role Management
 
-| Component | Technology | Why we chose it? |
-| :--- | :--- | :--- |
-| **Frontend** | **Flutter SDK** | Cross-platform performance (Android/Web/Windows) with a stunning UI. |
-| **Language** | **Dart** | Modern, type-safe language for robust application logic. |
-| **Database** | **Firestore** | Real-time NoSQL cloud database with offline persistence. |
-| **Auth** | **Firebase Auth** | Industry-standard secure login (Email/Password). |
-| **Logic** | **Provider** | Clean state management for responsive real-time updates. |
-| **Security** | **safe_device** | Blocks compromised (Rooted/Jailbroken) devices to prevent data scraping. |
-| **Hashing** | **BCrypt** | Secure local data integrity and secondary password layers. |
-| **Charts** | **fl_chart** | Beautiful, interactive data visualization. |
+* Manage users and their roles.
+* Assign Managers.
+* Reset member passwords.
+* Control access to different areas of the application.
 
----
+### Mess Management
 
-## 🔒 Security & Integrity
-MessBook(v4.2+) implements enterprise-grade security to protect your mess data:
+* Manage multiple mess/hostel environments.
+* Generate hostel invite codes.
+* Manage mess-related data.
 
-- **Root/Jailbreak Detection**: On startup, the app checks for compromised environments and blocks access if the device is not secure.
-- **Release Obfuscation**: The production code is fully obfuscated (ProGuard & Dart Obfuscation), making reverse engineering nearly impossible.
-- **Input Sanitization**: Strict validation on all financial inputs to prevent logic errors or malicious entries.
+### Data Management
+
+* Export database backups.
+* Maintain centralized application data.
 
 ---
 
-## 📂 Project Structure
+## 💼 Manager
+
+The Manager handles the day-to-day operations of a mess.
+
+### 💰 Financial Management
+
+* Record daily market expenses.
+* Record member contributions.
+* Manage hand-cash transactions.
+* Review expense requests.
+
+### 🍽️ Meal Management
+
+* Record breakfast, lunch, and dinner.
+* Track member meal consumption.
+* Monitor meal-related statistics.
+
+### 🛒 Market Duty
+
+* Assign market duties.
+* Track duty schedules.
+* Allow members to view their assigned duties.
+
+### 📢 Notices
+
+* Publish important notices.
+* Communicate operational updates to members.
+
+### 📝 Request Processing
+
+* Review member expense/item requests.
+* Approve or reject submitted requests.
+
+---
+
+## 👤 Member
+
+Members can monitor their personal mess activities through their dashboard.
+
+### 📊 Personal Dashboard
+
+* View current balance.
+* View total meal count.
+* View current meal rate.
+* Monitor personal mess information.
+
+### 📜 History
+
+* View meal history.
+* View contribution history.
+* View expense-related information.
+
+### ⭐ Meal Feedback
+
+* Rate daily meals.
+* Provide feedback to the Manager.
+
+### 🛍️ Entry Requests
+
+* Request money/items for specific purchases.
+* Track submitted requests.
+
+### 🔔 Notifications
+
+* Receive updates about notices.
+* Receive request approval information.
+* Stay informed about market duties.
+
+---
+
+# 🚀 Specialized Modules
+
+## 📊 Dynamic Analytics
+
+Interactive charts powered by `fl_chart` provide visual insights into:
+
+* Expense trends
+* Meal consumption
+* Financial information
+* Mess activity
+
+## 💬 Real-Time Group Chat
+
+Members can communicate with each other through an integrated group chat instead of depending on external messaging applications for everyday mess-related communication.
+
+## 🛒 Smart Market Duty
+
+Market duties can be assigned and tracked through the application, helping distribute responsibilities among members.
+
+## 🧠 Expense Prediction
+
+MessBook includes an expense prediction module designed to estimate future monthly costs based on current spending patterns.
+
+## 📄 PDF Reporting
+
+Generate professional financial documents and monthly statements for easier auditing and record keeping.
+
+---
+
+# 🛠️ Technology Stack
+
+| Component        | Technology                  | Purpose                                    |
+| ---------------- | --------------------------- | ------------------------------------------ |
+| Frontend         | **Flutter**                 | Cross-platform application development     |
+| Language         | **Dart**                    | Application logic and UI development       |
+| Database         | **Cloud Firestore**         | Cloud-based real-time NoSQL database       |
+| Authentication   | **Firebase Authentication** | User authentication                        |
+| State Management | **Provider**                | Application state management               |
+| Device Security  | **safe_device**             | Root/jailbreak and device integrity checks |
+| Password/Hashing | **BCrypt**                  | Password hashing / data integrity          |
+| Charts           | **fl_chart**                | Data visualization                         |
+| Reporting        | **PDF generation**          | Financial reports and statements           |
+
+---
+
+# 🔒 Security
+
+MessBook includes several security-focused features:
+
+### 🔐 Authentication
+
+User authentication is handled through Firebase Authentication.
+
+### 📱 Device Integrity
+
+The application can check whether a device environment is compromised, such as rooted or jailbroken devices.
+
+### 🛡️ Input Validation
+
+Financial and application inputs are validated before processing to reduce invalid or unexpected data.
+
+### 🔑 Password Protection
+
+BCrypt is used where password hashing is required.
+
+### 📦 Release Obfuscation
+
+Release builds can use Dart obfuscation and Android optimization/minification to make application reverse engineering more difficult.
+
+> Security mechanisms reduce risk but cannot guarantee that an application is impossible to reverse engineer or compromise.
+
+---
+
+# 📂 Project Structure
 
 ```text
 lib/
-├── models/         # PODOs with Firestore (to/from) serialization
-├── providers/      # ChangeNotifier state for meals, expenses, chat, etc.
-├── screens/        # Organized UI (Admin/, Manager/, Member/, Shared/, Auth/)
-├── services/       # Core logic: AuthService, ExpensePrediction, NotificationService
-├── widgets/        # Reusable UI components (DashboardCards, Slidables, Drawers)
-├── utils/          # Constants, currency formatters, and date helpers
-├── routes.dart     # Centralized navigation mapping
-└── main.dart       # App initialization and Global Provider setup
+├── models/         # Firestore data models and serialization
+├── providers/      # ChangeNotifier state management
+├── screens/        # Admin, Manager, Member, Auth and Shared screens
+├── services/       # Authentication, notifications, prediction, etc.
+├── widgets/        # Reusable UI components
+├── utils/          # Constants, formatters and helper functions
+├── routes.dart     # Centralized application routes
+└── main.dart       # Application entry point
 ```
 
 ---
 
-## ⚙️ Quick Start Guide
+# ⚙️ Getting Started
 
-### 1️⃣ Prerequisites
-- **Flutter SDK** (v3.7.2 or higher)
-- **Firebase CLI** (`npm install -g firebase-tools`)
-- A Firebase Project (with Firestore & Email Auth enabled)
+## 1️⃣ Prerequisites
 
-### 2️⃣ Installation
+Make sure you have:
+
+* Flutter SDK `3.7.2` or later
+* Dart SDK
+* Firebase project
+* Firebase CLI
+* FlutterFire CLI
+
+Install Firebase CLI:
+
 ```bash
-# Clone the repository
-git clone https://github.com/Mustad-Afin-Shimanto/mess_meal_management_app.git
-cd mess_manager
+npm install -g firebase-tools
+```
 
-# Install dependencies
+Install FlutterFire CLI:
+
+```bash
+dart pub global activate flutterfire_cli
+```
+
+---
+
+## 2️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/Md-Kawsarul-Islam/MessBook.git
+cd MessBook
+```
+
+---
+
+## 3️⃣ Install Dependencies
+
+```bash
 flutter pub get
 ```
 
-### 3️⃣ Firebase Setup
-Ensure your Firebase project is configured across platforms. If using **FlutterFire CLI**:
+---
+
+## 4️⃣ Configure Firebase
+
+Create your Firebase project and enable the required services.
+
+Then configure Firebase for the Flutter application:
+
 ```bash
 flutterfire configure
 ```
 
-### 4️⃣ Running the App
-**For Development:**
-```bash
-# Mobile
-flutter run
+Depending on your configuration, you may need to enable:
 
-# Web
+* Firebase Authentication
+* Cloud Firestore
+* Firebase Cloud Messaging
+
+---
+
+## 5️⃣ Run the Application
+
+### Android
+
+```bash
+flutter run
+```
+
+### Web
+
+```bash
 flutter run -d chrome --web-port=3000
 ```
 
 ---
 
-## 📦 Building for Production
+# 📦 Production Build
 
-To build a secure, obfuscated release APK:
-1. Ensure `build_release.bat` is configured for your environment.
-2. Run the build command:
+For an Android release build:
+
+```bash
+flutter build apk --release
+```
+
+If the project is configured with the included release script:
+
 ```powershell
 .\build_release.bat
 ```
-*This command triggers resource shrinking and Dart symbol obfuscation.*
+
+The release configuration can include Dart obfuscation and Android build optimization.
 
 ---
 
-## 🤝 Contributing & Support
+# 🧪 Testing
 
-We welcome contributions! Feel free to:
-- 🐞 Report bugs via GitHub Issues.
-- 💡 Propose new features (e.g., Image receipts, Global analytics).
-- 🔧 Submit Pull Requests for optimizations.
+Run Flutter tests with:
 
-**Project maintainer:** [Mustad Afin Shimanto](https://github.com/Md-Kawsarul-Islam)  
-**Developed with ❤️ for the student & mess community.**
+```bash
+flutter test
+```
+
+Analyze the project:
+
+```bash
+flutter analyze
+```
 
 ---
-© 2026 Mustad Afin Shimanto & Antigravity. Licensed under MIT.
 
+# 🤝 Contributing
 
+Contributions and suggestions are welcome.
+
+You can contribute by:
+
+* 🐞 Reporting bugs
+* 💡 Suggesting new features
+* 🔧 Improving existing functionality
+* 📝 Improving documentation
+* 🚀 Submitting pull requests
+
+---
+
+# 👨‍💻 Project Maintainer
+
+**Md Kawsarul Islam**
+
+CSE Student | Full Stack Developer | Flutter Developer
+
+GitHub: [Md-Kawsarul-Islam](https://github.com/Md-Kawsarul-Islam)
+
+---
+
+# 📄 License
+
+This project is licensed under the **MIT License**.
+
+---
+
+© 2026 Md Kawsarul Islam
