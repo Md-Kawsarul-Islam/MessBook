@@ -1,6 +1,7 @@
 {
   "projects": {
-    "messbook": "mess-manager-d31d9"
+    "messbook": "mess-manager-d31d9",
+    "default": "mess-manager-d31d9"
   },
   "targets": {},
   "etags": {}
