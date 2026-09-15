@@ -4,115 +4,171 @@ import 'package:mess_manager/services/meal_service.dart';
 
 /// Provider for managing MealEntry data.
 class MealProvider with ChangeNotifier {
-  final MealService _mealService;
-  List<MealEntry> _mealEntries = [];
-  final Map<String, double> _monthlyMemberMeals =
-      {}; // memberId (String) -> total meals
-  double _monthlyMessMeals = 0.0;
+final MealService _mealService;
 
-  MealProvider(this._mealService);
+List<MealEntry> _mealEntries = [];
+final Map<String, double> _monthlyMemberMeals = {};
+double _monthlyMessMeals = 0.0;
 
-  List<MealEntry> get mealEntries => _mealEntries;
-  Map<String, double> get monthlyMemberMeals => _monthlyMemberMeals;
-  double get monthlyMessMeals => _monthlyMessMeals;
+MealProvider(this._mealService);
 
-  /// Fetches meal entries for a specific date in a specific hostel.
-  Future<void> fetchMealEntriesByDate(DateTime date, String hostelId) async {
-    _mealEntries = await _mealService.getMealEntriesByDate(date, hostelId);
-    notifyListeners();
-  }
+// Getters
+List<MealEntry> get mealEntries => _mealEntries;
 
-  /// Fetches meal entries for a specific member in a specific hostel.
-  Future<List<MealEntry>> fetchMealEntriesByMember(
-    String memberId,
-    String hostelId,
-  ) async {
-    return await _mealService.getMealEntriesByMember(memberId, hostelId);
-  }
+Map<String, double> get monthlyMemberMeals => _monthlyMemberMeals;
 
-  /// Adds or updates a meal entry for a specific hostel.
-  Future<bool> addOrUpdateMealEntry(
-    MealEntry mealEntry,
-    String hostelId,
-  ) async {
-    final String id = await _mealService.addMealEntry(mealEntry, hostelId);
-    if (id.isNotEmpty) {
-      // Re-fetch data relevant to the UI that might change
-      await fetchMealEntriesByDate(
-        mealEntry.mealDate,
-        hostelId,
-      ); // Update daily view
-      await calculateMonthlyMeals(
-        DateTime.now().month,
-        DateTime.now().year,
-        hostelId,
-      ); // Update dashboard summary
-      notifyListeners();
-      return true;
-    }
-    return false;
-  }
+double get monthlyMessMeals => _monthlyMessMeals;
 
-  /// Deletes a meal entry from a specific hostel.
-  Future<bool> deleteMealEntry(
-    String id,
-    DateTime mealDate,
-    String hostelId,
-  ) async {
-    final bool success = await _mealService.deleteMealEntry(id, hostelId);
-    if (success) {
-      await fetchMealEntriesByDate(mealDate, hostelId); // Update daily view
-      await calculateMonthlyMeals(
-        DateTime.now().month,
-        DateTime.now().year,
-        hostelId,
-      ); // Update dashboard summary
-      notifyListeners();
-    }
-    return success;
-  }
+/// Fetch meal entries for a specific date and hostel.
+Future<void> fetchMealEntriesByDate(
+DateTime date,
+String hostelId,
+) async {
+_mealEntries = await _mealService.getMealEntriesByDate(
+date,
+hostelId,
+);
 
-  /// Calculates and updates monthly meal summaries for a specific hostel.
-  Future<void> calculateMonthlyMeals(
-    int month,
-    int year,
-    String hostelId,
-  ) async {
-    _monthlyMessMeals = await _mealService.getMonthlyTotalMealsForMess(
-      month,
-      year,
-      hostelId,
-    );
-    notifyListeners();
-  }
+notifyListeners();
+}
 
-  /// Retrieves the total meals for a specific member in a given month and year in a specific hostel.
-  Future<double> getMonthlyTotalMealsForMember(
-    String memberId,
-    int month,
-    int year,
-    String hostelId,
-  ) async {
-    return await _mealService.getMonthlyTotalMealsForMember(
-      memberId,
-      month,
-      year,
-      hostelId,
-    );
-  }
+/// Fetch meal entries for a specific member and hostel.
+Future<List<MealEntry>> fetchMealEntriesByMember(
+String memberId,
+String hostelId,
+) async {
+return await _mealService.getMealEntriesByMember(
+memberId,
+hostelId,
+);
+}
 
-  /// Gets the meal entry for a specific member on a specific date from the current fetched list.
-  MealEntry? getMealEntryForMemberAndDate(String memberId, DateTime date) {
-    try {
-      return _mealEntries.firstWhere(
-        (entry) =>
-            entry.memberId == memberId &&
-            entry.mealDate.year == date.year &&
-            entry.mealDate.month == date.month &&
-            entry.mealDate.day == date.day,
-      );
-    } catch (e) {
-      return null;
-    }
-  }
+/// Add or update a meal entry.
+Future<bool> addOrUpdateMealEntry(
+MealEntry mealEntry,
+String hostelId,
+) async {
+try {
+final String id = await _mealService.addMealEntry(
+mealEntry,
+hostelId,
+);
+
+if (id.isEmpty) {
+return false;
+}
+
+// Refresh daily meal entries.
+await fetchMealEntriesByDate(
+mealEntry.mealDate,
+hostelId,
+);
+
+// Refresh monthly meal summary.
+await calculateMonthlyMeals(
+mealEntry.mealDate.month,
+mealEntry.mealDate.year,
+hostelId,
+);
+
+return true;
+} catch (e) {
+debugPrint('Error adding/updating meal entry: $e');
+return false;
+}
+}
+
+/// Delete a meal entry.
+Future<bool> deleteMealEntry(
+String id,
+DateTime mealDate,
+String hostelId,
+) async {
+try {
+final bool success = await _mealService.deleteMealEntry(
+id,
+hostelId,
+);
+
+if (!success) {
+return false;
+}
+
+// Refresh daily meal entries.
+await fetchMealEntriesByDate(
+mealDate,
+hostelId,
+);
+
+// Refresh monthly meal summary.
+await calculateMonthlyMeals(
+mealDate.month,
+mealDate.year,
+hostelId,
+);
+
+return true;
+} catch (e) {
+debugPrint('Error deleting meal entry: $e');
+return false;
+}
+}
+
+/// Calculate total meals for the mess for a specific month.
+Future<void> calculateMonthlyMeals(
+int month,
+int year,
+String hostelId,
+) async {
+try {
+_monthlyMessMeals =
+await _mealService.getMonthlyTotalMealsForMess(
+month,
+year,
+hostelId,
+);
+
+notifyListeners();
+} catch (e) {
+debugPrint('Error calculating monthly meals: $e');
+}
+}
+
+/// Get total meals for a specific member for a specific month.
+Future<double> getMonthlyTotalMealsForMember(
+String memberId,
+int month,
+int year,
+String hostelId,
+) async {
+try {
+return await _mealService.getMonthlyTotalMealsForMember(
+memberId,
+month,
+year,
+hostelId,
+);
+} catch (e) {
+debugPrint('Error getting member monthly meals: $e');
+return 0.0;
+}
+}
+
+/// Get a meal entry for a specific member and date.
+MealEntry? getMealEntryForMemberAndDate(
+String memberId,
+DateTime date,
+) {
+try {
+return _mealEntries.firstWhere(
+(entry) =>
+entry.memberId == memberId &&
+entry.mealDate.year == date.year &&
+entry.mealDate.month == date.month &&
+entry.mealDate.day == date.day,
+);
+} catch (e) {
+return null;
+}
+}
 }

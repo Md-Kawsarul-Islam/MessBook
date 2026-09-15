@@ -25,6 +25,7 @@ class MemberProvider with ChangeNotifier {
 
   /// Fetches only members who are associated with active non-admin users for a specific hostel.
   Future<void> fetchActiveMembers(String hostelId) async {
+    _members = await _memberService.getAllMembers(hostelId);
     await _fetchActiveMembersInternal(hostelId);
     notifyListeners();
   }

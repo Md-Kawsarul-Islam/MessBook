@@ -1,8 +1,316 @@
 rules_version = '2';
+
 service cloud.firestore {
   match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function userExists() {
+      return signedIn()
+        && exists(
+          /databases/$(database)/documents/users/$(request.auth.uid)
+        );
+    }
+
+    function currentUser() {
+      return get(
+        /databases/$(database)/documents/users/$(request.auth.uid)
+      ).data;
+    }
+
+    function isAdmin() {
+      return userExists()
+        && currentUser().role == 'admin';
+    }
+
+    function isManager() {
+      return userExists()
+        && currentUser().role == 'manager';
+    }
+
+    function isActiveUser() {
+      return userExists()
+        && currentUser().isActive == true;
+    }
+
+    function belongsToHostel(hostelId) {
+      return isActiveUser()
+        && currentUser().currentHostelId == hostelId;
+    }
+
+    function canManageHostel(hostelId) {
+      return belongsToHostel(hostelId)
+        && (
+          currentUser().role == 'admin'
+          || currentUser().role == 'manager'
+        );
+    }
+
+
+    // =========================
+    // USERS
+    // =========================
+
+    match /users/{userId} {
+
+      allow get: if signedIn()
+        && (
+          request.auth.uid == userId
+          || isAdmin()
+        );
+
+      allow list: if isAdmin() || isManager();
+
+      allow create: if signedIn()
+        && request.auth.uid == userId
+        && request.resource.data.role == 'member'
+        && request.resource.data.isActive == true;
+
+      allow update: if isAdmin()
+        || (
+          signedIn()
+          && request.auth.uid == userId
+          && request.resource.data.role == resource.data.role
+          && request.resource.data.currentHostelId == resource.data.currentHostelId
+          && request.resource.data.memberId == resource.data.memberId
+          && request.resource.data.isActive == resource.data.isActive
+        );
+
+      allow delete: if isAdmin();
+    }
+
+
+    // =========================
+    // HOSTELS
+    // =========================
+
+    match /hostels/{hostelId} {
+
+      allow get: if signedIn();
+
+      allow list: if signedIn();
+
+      allow create: if signedIn()
+        && request.resource.data.ownerId == request.auth.uid;
+
+      allow update, delete: if canManageHostel(hostelId)
+        || (
+          signedIn()
+          && resource.data.ownerId == request.auth.uid
+        );
+
+
+      // =========================
+      // MEMBERS
+      // =========================
+
+      match /members/{memberId} {
+
+        allow read: if belongsToHostel(hostelId)
+          || isAdmin();
+
+        allow create: if canManageHostel(hostelId)
+          || (
+            signedIn()
+            && request.resource.data.role == 'member'
+            && request.resource.data.email == request.auth.token.email
+          );
+
+        allow update: if canManageHostel(hostelId)
+          || (
+            signedIn()
+            && resource.data.email == request.auth.token.email
+            && request.resource.data.role == resource.data.role
+          );
+
+        allow delete: if canManageHostel(hostelId);
+      }
+
+
+      // =========================
+      // MEALS
+      // =========================
+
+      match /mealEntries/{entryId} {
+
+        allow read: if belongsToHostel(hostelId)
+          || isAdmin();
+
+        allow create: if canManageHostel(hostelId)
+          || (
+            belongsToHostel(hostelId)
+            && request.resource.data.memberId == currentUser().memberId
+          );
+
+        allow update, delete: if canManageHostel(hostelId)
+          || (
+            belongsToHostel(hostelId)
+            && resource.data.memberId == currentUser().memberId
+          );
+      }
+
+
+      // =========================
+      // EXPENSES
+      // =========================
+
+      match /expenses/{expenseId} {
+
+        allow read: if belongsToHostel(hostelId)
+          || isAdmin();
+
+        allow create, update, delete:
+          if canManageHostel(hostelId);
+      }
+
+
+      // =========================
+      // CONTRIBUTIONS
+      // =========================
+
+      match /contributions/{contributionId} {
+
+        allow read: if belongsToHostel(hostelId)
+          || isAdmin();
+
+        allow create: if canManageHostel(hostelId)
+          || (
+            belongsToHostel(hostelId)
+            && request.resource.data.memberId == currentUser().memberId
+          );
+
+        allow update, delete:
+          if canManageHostel(hostelId);
+      }
+
+
+      // =========================
+      // MARKET SCHEDULE
+      // =========================
+
+      match /marketSchedules/{scheduleId} {
+
+        allow read: if belongsToHostel(hostelId)
+          || isAdmin();
+
+        allow create, update, delete:
+          if canManageHostel(hostelId);
+      }
+
+
+      // =========================
+      // CHAT
+      // =========================
+
+      match /messages/{messageId} {
+
+        allow read: if belongsToHostel(hostelId)
+          || isAdmin();
+
+        allow create: if belongsToHostel(hostelId)
+          && request.resource.data.senderId == request.auth.uid;
+
+        allow update, delete: if canManageHostel(hostelId)
+          || (
+            belongsToHostel(hostelId)
+            && resource.data.senderId == request.auth.uid
+          );
+      }
+
+
+      // =========================
+      // EXPENSE REQUESTS
+      // =========================
+
+      match /expense_requests/{requestId} {
+
+        allow read: if canManageHostel(hostelId)
+          || (
+            belongsToHostel(hostelId)
+            && resource.data.memberId == currentUser().memberId
+          );
+
+        allow create: if belongsToHostel(hostelId)
+          && request.resource.data.memberId == currentUser().memberId;
+
+        allow update: if canManageHostel(hostelId);
+
+        allow delete: if canManageHostel(hostelId)
+          || (
+            belongsToHostel(hostelId)
+            && resource.data.memberId == currentUser().memberId
+          );
+      }
+
+
+      // =========================
+      // FEEDBACK
+      // =========================
+
+      match /feedback/{feedbackId} {
+
+        allow read: if belongsToHostel(hostelId)
+          || isAdmin();
+
+        allow create: if belongsToHostel(hostelId)
+          && request.resource.data.memberId == currentUser().memberId;
+
+        allow update, delete: if canManageHostel(hostelId)
+          || (
+            belongsToHostel(hostelId)
+            && resource.data.memberId == currentUser().memberId
+          );
+      }
+
+
+      // =========================
+      // NOTICES
+      // =========================
+
+      match /notices/{noticeId} {
+
+        allow read: if belongsToHostel(hostelId)
+          || isAdmin();
+
+        allow create, update, delete:
+          if canManageHostel(hostelId);
+      }
+    }
+
+
+    // =========================
+    // MONTHLY HISTORY
+    // =========================
+
+    match /monthly_history/{historyId} {
+
+      allow read: if signedIn();
+
+      allow create, update, delete:
+        if isAdmin() || isManager();
+    }
+
+
+    // =========================
+    // APP SETTINGS
+    // =========================
+
+    match /config/app_settings {
+
+      allow read: if signedIn();
+
+      allow write: if isAdmin();
+    }
+
+
+    // =========================
+    // DEFAULT DENY
+    // =========================
+
     match /{document=**} {
-      allow read, write: if true;
+      allow read, write: if false;
     }
   }
 }

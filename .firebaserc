@@ -1,5 +1,7 @@
 {
-  "projects": {},
+  "projects": {
+    "messbook": "mess-manager-d31d9"
+  },
   "targets": {},
   "etags": {}
 }
